@@ -1,7 +1,7 @@
 from telegram import Update
 
 
-def handle_response(text: str, update:Update) -> str:
+def generate_text(text: str, update:Update) -> str:
     processed: str = update.message.text.lower()
 
     if 'hello' in processed:
