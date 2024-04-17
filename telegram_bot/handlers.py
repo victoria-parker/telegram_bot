@@ -22,7 +22,7 @@ async def handle_audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text('Audio converted to wav and stored in our database.')
     except Exception as e:
         logging.error(f'Error at handle audio: {str(e)}')
-        await update.message.reply_text(f'Sorry, an error occurred: {str(e)}')
+        await update.message.reply_text(f'Sorry, an error occurred. Please try again later.')
 
 async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
@@ -38,7 +38,7 @@ async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     except Exception as e:
         logging.error(f'Error at handle image: {str(e)}')
-        await update.message.reply_text(f'Sorry, an error occurred: {str(e)}')
+        await update.message.reply_text(f'Sorry, an error occurred. Please try again later.')
              
 
 
