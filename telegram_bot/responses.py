@@ -7,4 +7,4 @@ def generate_text(text: str, update:Update) -> str:
     if 'hello' or 'hi' or 'hey' in processed:
         return f'Hello {update.effective_user.first_name}'
 
-    return ' I generally do not talk much, I mainly process audio messages and detect faces in pictures. Send me an audio message or a picture and I will be happy'
+    return 'Hey there! While I may not chat much, I excel at processing audio messages and detecting faces in pictures. Feel free to send me an audio message or a picture, and I\'ll be more than happy to assist you!'
