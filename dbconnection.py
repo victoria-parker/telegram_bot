@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from config import MONGODB_URI
+import logging
 
 client = MongoClient(MONGODB_URI)
 db = client.get_database('telegram_bot')
@@ -18,8 +19,8 @@ def store_audio(user_id:str,file_name:str):
         else:
             audios.insert_one({"user_id": user_id, "audio_messages": [file_name]})
     
-    except Exception as e:     
-        print(f'Error al almacenar audio en la base de datos: {str(e)}')
+    except Exception as e:
+        logging.error(f'Error at store audio in database: {str(e)}')
 
 def store_image(user_id:str,file_name:str):
     try:
@@ -33,5 +34,5 @@ def store_image(user_id:str,file_name:str):
             images.insert_one({"user_id": user_id, "image_messages": [file_name]})
     
     except Exception as e:     
-        print(f'There has been a problem while storing the image: {str(e)}')
+        logging.error(f'Error at store image in database: {str(e)}')
     
