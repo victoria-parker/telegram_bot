@@ -23,19 +23,19 @@ async def handle_audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f'Sorry, an error occurred: {str(e)}')
 
 async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
-        try:
-            
-            image = await download_image(update)
-            processed_image = await process_image(image)
+    try:
+        
+        image = await download_image(update)
+        processed_image = await process_image(image)
 
-            if processed_image: 
-                store_image_db = store_image(update.effective_user.id,processed_image) 
-                await update.message.reply_text("There is at least one face in this image, so I will store it in our database.")
-            else:
-                await update.message.reply_text("There is not one face in this image, so I won't store it in our database.")
+        if processed_image: 
+            store_image_db = store_image(update.effective_user.id,processed_image) 
+            await update.message.reply_text("There is at least one face in this image, so I will store it in our database.")
+        else:
+            await update.message.reply_text("There is not one face in this image, so I won't store it in our database.")
 
-        except Exception as e:
-            await update.message.reply_text(f'Sorry, an error occurred: {str(e)}')
+    except Exception as e:
+        await update.message.reply_text(f'Sorry, an error occurred: {str(e)}')
              
 
 
