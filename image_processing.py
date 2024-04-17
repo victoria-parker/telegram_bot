@@ -9,7 +9,7 @@ async def process_image(file_path: str):
     if detection_face:
         destination_path = await create_file_name(file_path)
         shutil.copyfile(file_path, destination_path)
-        return True
+        return destination_path
     else:
         return False
 

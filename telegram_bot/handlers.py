@@ -4,7 +4,7 @@ from telegram_bot.responses import generate_text
 from telegram_bot.downloads import download_audio, download_image
 from audio_processing import process_audio
 from image_processing import process_image
-from dbconnection import store_audio
+from dbconnection import store_audio, store_image
 
 async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
@@ -28,9 +28,9 @@ async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
             image = await download_image(update)
             processed_image = await process_image(image)
 
-            if processed_image == True: 
+            if processed_image: 
+                store_image_db = store_image(update.effective_user.id,processed_image) 
                 await update.message.reply_text('img with at least one face')
-                #store_image_db = store_image(update.effective_user.id,processed_image) 
             else:
                 await update.message.reply_text('img has no faces')
 
