@@ -1,7 +1,7 @@
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 from config import TELEGRAM_TOKEN
 from telegram_bot.commands import start_command, help_command
-from telegram_bot.handlers import handle_text_message, handle_audio
+from telegram_bot.handlers import handle_text_message, handle_audio, handle_image
 
 #Running
 if __name__ == '__main__':
@@ -14,6 +14,7 @@ if __name__ == '__main__':
     # Responses
     app.add_handler(MessageHandler(filters.TEXT, handle_text_message))
     app.add_handler(MessageHandler(filters.VOICE, handle_audio))
+    app.add_handler(MessageHandler(filters.PHOTO, handle_image))
 
     #Polls the bot
     print('Polling')
