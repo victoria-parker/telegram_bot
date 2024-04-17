@@ -3,13 +3,15 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 from config import TELEGRAM_TOKEN
 from telegram_bot.commands import start_command, help_command
 from telegram_bot.handlers import handle_text_message, handle_audio, handle_image
+from logging_config import *
 
 #Error
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    print(f'Update {update} caused error: {context.error}')
+    logging.error(f'Update {update} caused error: {context.error}')
 
 #Running
 if __name__ == '__main__':
+    logging.info('Starting bot...')
     print('Starting bot...')
     # Commands
     app = Application.builder().token(TELEGRAM_TOKEN).build()
@@ -25,5 +27,6 @@ if __name__ == '__main__':
     app.add_error_handler(error)
 
     #Polls the bot
+    logging.info('Polling')
     print('Polling')
     app.run_polling(poll_interval=3)
