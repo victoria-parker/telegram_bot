@@ -18,7 +18,7 @@ async def handle_audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
         audio = await download_audio(update)
         processed_audio = await process_audio(audio)
         store_audio_db = store_audio(update.effective_user.id,processed_audio)
-        await update.message.reply_text('audio converted to wav and stored in our database')
+        await update.message.reply_text('Audio converted to wav and stored in our database.')
     except Exception as e:
         await update.message.reply_text(f'Sorry, an error occurred: {str(e)}')
 
@@ -30,9 +30,9 @@ async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
             if processed_image: 
                 store_image_db = store_image(update.effective_user.id,processed_image) 
-                await update.message.reply_text('img with at least one face')
+                await update.message.reply_text("There is at least one face in this image, so I will store it in our database.")
             else:
-                await update.message.reply_text('img has no faces')
+                await update.message.reply_text("There is not one face in this image, so I won't store it in our database.")
 
         except Exception as e:
             await update.message.reply_text(f'Sorry, an error occurred: {str(e)}')
