@@ -16,17 +16,19 @@ async def process_image(file_path: str):
             return False
     except Exception as e:
         logging.error(f'Error processing image: {str(e)}')
+        raise Exception("Error at process image")
 
 async def image_face_detector(file_path: str):
-    try:
         image = cv2.imread(file_path)
+        if image is None:
+            logging.error(f'Failed to read image file: {file_path}')
+            raise RuntimeError(f'Failed to read image file: {file_path}')
+
         face_locations = face_recognition.face_locations(image)
         if face_locations:
             return True
         else:
             return False
-    except Exception as e:
-        logging.error(f'Error at image face detector: {str(e)}')
     
 async def create_file_name(file_path: str):
     try:
@@ -50,3 +52,4 @@ async def create_file_name(file_path: str):
         return new_file_path
     except Exception as e:
         logging.error(f'Error at create file name for image: {str(e)}')
+        raise Exception("Failed to create file name")
