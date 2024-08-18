@@ -4,25 +4,21 @@ from datetime import datetime
 import logging
 
 async def process_audio(file_path: str):
-    try:
-        #creates the path for the new file
-        new_file_path = await create_file_name(file_path)
-        
-        #converts the file from the file path given as input and returns its new path output
-        converted = await convert_to_wav(file_path,new_file_path)
-        
-        return converted
-    except Exception as e:
-        logging.error(f'Error processing audio: {str(e)}')
+    new_file_path = await create_file_name(file_path)
+    success = await convert_to_wav(file_path, new_file_path)
+    
+    if success:
+        return new_file_path
+    else:
+        logging.error(f'Audio conversion failed for file: {file_path}')
+        raise Exception("Audio conversion failed")
 
-async def convert_to_wav(input: str,output: str):
-    try:
-        sound = AudioSegment.from_file(input, "ogg")
-        sound = sound.set_frame_rate(16000)
-        sound.export(output, format="wav")
-        return output
-    except Exception as e:
-        logging.error(f'Error at converting to wav: {str(e)}')
+async def convert_to_wav(input: str,output: str):        
+    sound = AudioSegment.from_file(input, "ogg")
+    sound = sound.set_frame_rate(16000)
+    sound.export(output, format="wav")
+    
+    return os.path.exists(output) and os.path.getsize(output) > 0
 
 async def create_file_name(file_path: str):
     try:
