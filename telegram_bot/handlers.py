@@ -26,7 +26,8 @@ async def handle_audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
-        
+        await update.message.reply_text("Thank you for sending the image. Processing may take a few seconds.")
+
         image = await download_image(update)
         processed_image = await process_image(image)
 
