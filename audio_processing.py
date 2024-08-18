@@ -39,3 +39,4 @@ async def create_file_name(file_path: str):
         return new_file_path
     except Exception as e:
         logging.error(f'Error at creating file name for audio file: {str(e)}')
+        raise Exception("Failed to create file name")
